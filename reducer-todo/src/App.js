@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
 import { initialState, reducer } from './reducers/reducer';
 import TodoList from './components/TodoList';
 import Completed from './components/Completed';
@@ -8,7 +8,12 @@ import './App.css';
 
 function App() {
   const [newTitle, setNewTitle] = useState("");
+  const [completedTodos, setCompletedTodos] = useState([])
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect( () => {
+     setCompletedTodos([...completedTodos, ...state.doneTodos])
+  },[state.doneTodos])
   
   const handleInput = (event) => {
       event.preventDefault();
@@ -40,7 +45,7 @@ function App() {
       </form>
       <div className="main-container">
         <TodoList todos={state.todos} toggle={handleToggle}  />
-        <Completed />
+        <Completed done={completedTodos}/>
       </div>  
       
     </div>

@@ -50,7 +50,8 @@ export const initialState = {
          {item: 'Learn about Redux',
          completed: false,
          id: Date.now() +6
-         }]
+         }],
+    doneTodos: []     
 }
   
 
@@ -66,15 +67,18 @@ export const initialState = {
   
         case "ADD_TODO":
           return {
+             ...state,
              todos: [...state.todos, {item: action.payload, completed: false, id: Date.now()}]            
           }  
 
         case "DELETE_TODO":
           const deletedTodos = state.todos.filter( (item) => !item.completed);
+          const completedTodos = state.todos.filter( item => item.completed)
           return  {
-            todos: deletedTodos
+            todos: deletedTodos,
+            doneTodos: completedTodos
           } 
-          
+
         default:
           return state
       }
