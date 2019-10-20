@@ -24,7 +24,7 @@ function App() {
   }
  const handleSubmit = (event) => {
      event.preventDefault();
-     if(state.title) {
+     if(newTitle) {
       dispatch({type:"ADD_TODO", payload: newTitle || state.title});
      }
      setNewTitle("")
