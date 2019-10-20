@@ -3,7 +3,6 @@ import { initialState, reducer } from './reducers/reducer';
 import TodoList from './components/TodoList';
 import Completed from './components/Completed';
 import Alert from 'react-bootstrap/Alert';
-import {Button} from 'react-bootstrap';
 import './App.css';
 
 function App() {
@@ -25,7 +24,9 @@ function App() {
   }
  const handleSubmit = (event) => {
      event.preventDefault();
-     dispatch({type:"ADD_TODO", payload: newTitle || state.title});
+     if(state.title) {
+      dispatch({type:"ADD_TODO", payload: newTitle || state.title});
+     }
      setNewTitle("")
  }
 
@@ -40,8 +41,8 @@ function App() {
         <input type="text"
                value={newTitle}
                onChange={handleInput} />
-        <Button type="suBmit">Add</Button>
-        <Button variant="success" onClick={deleteTodos}>Clear Completed Todos</Button>
+        <button type="suBmit">Add</button>
+        <button variant="success" onClick={deleteTodos}>Clear Completed Todos</button>
       </form>
       <div className="main-container">
         <TodoList todos={state.todos} toggle={handleToggle}  />

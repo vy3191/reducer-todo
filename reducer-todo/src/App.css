@@ -26,3 +26,7 @@
    flex-direction: row;
    justify-content: space-around;
 }
+
+form {
+   margin-bottom: 15px;
+}
