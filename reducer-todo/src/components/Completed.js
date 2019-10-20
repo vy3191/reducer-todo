@@ -1,9 +1,11 @@
 import React from 'react'
+import Alert from 'react-bootstrap/Alert';
+import './components.css';
 
 function Completed() {
   return (
-    <div>
-      <h1>Completed Todos</h1>
+    <div className="completed">     
+      <Alert.Heading>Completed Todos</Alert.Heading>
     </div>
   )
 }
