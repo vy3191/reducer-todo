@@ -1,14 +1,14 @@
 import React, {useReducer} from 'react'
 import Alert from 'react-bootstrap/Alert';
-import {initialState, reducer} from '../reducers/reducer';
 import './components.css';
 
-function Todo(props) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const id = props.todo.item.id;
+function Todo(props) {   
+  
   return (
     <div style={{display:'flex', flexDirection:"row", justifyContent:"flex-start"}}> 
-      <input type="checkbox"  onCheck={() => {dispatch({type:"TOGGLE_TODO", payload:id})}}/>
+      <input type="checkbox" 
+             checked={props.todo.completed}
+             onChange={() => {props.toggle(props.todo.id)}}/>
       <Alert variant='warning' 
              className='alert'
        >{props.todo.item}</Alert>  

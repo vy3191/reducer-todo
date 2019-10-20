@@ -29,27 +29,27 @@ export const initialState = {
    todos:[ 
          {item: 'Learn about HTML5',
          completed: false,
-         id: Date.now()
+         id: Date.now() + 1
          },
          {item: 'Learn about CSS3',
          completed: false,
-         id: Date.now()
+         id: Date.now() + 2
          },
          {item: 'Learn about JavaScript',
          completed: false,
-         id: Date.now()
+         id: Date.now() +3
          },
          {item: 'Learn about JQuery',
          completed: false,
-         id: Date.now()
+         id: Date.now() +4
          },
          {item: 'Learn about React',
          completed: false,
-         id: Date.now()
+         id: Date.now() +5
          },
          {item: 'Learn about Redux',
          completed: false,
-         id: Date.now()
+         id: Date.now() +6
          }]
 }
   
@@ -57,27 +57,24 @@ export const initialState = {
   export function reducer(state, action) {
       switch(action.type) {
         case "TOGGLE_COMPLETED":
-          const toggledTodos = state.todos.map( (item) => {
-             if(item.id == action.payload) {
-                 return {
-                    ...item,
-                    completed: !item.completed
-                 }
-             } else {
-                return {
-                   item
-                }
-             }
-          });
-          
-          return {
-            todos: [...toggledTodos]            
-          }
-
+           return {
+              ...state,
+              todos: state.todos.map(item => item.id == action.payload
+                                ? {...item, completed: !item.completed}
+                                : item
+              )}
+  
         case "ADD_TODO":
           return {
              todos: [...state.todos, {item: action.payload, completed: false, id: Date.now()}]            
           }  
+
+        case "DELETE_TODO":
+          const deletedTodos = state.todos.filter( (item) => !item.completed);
+          return  {
+            todos: deletedTodos
+          } 
+          
         default:
           return state
       }
